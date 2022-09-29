@@ -1,0 +1,33 @@
+--Write a quary that returns all brands with products for both 2018 and 2020 model year.
+
+SELECT	DISTINCT B.brand_id, B.brand_name
+FROM	product.product A, product.brand B
+WHERE	model_year = 2018
+AND		A.brand_id = B.brand_id
+INTERSECT
+SELECT	DISTINCT B.brand_id, B.brand_name
+FROM	product.product A, product.brand B
+WHERE	model_year = 2020
+AND		A.brand_id = B.brand_id
+
+
+SELECT customer_id, first_name, last_name
+FROM sale.customer
+WHERE customer_id IN (
+
+						SELECT DISTINCT customer_id
+						FROM sale.orders
+						WHERE order_date BETWEEN '2018-01-01' AND '2018-12-31'
+
+						INTERSECT
+
+						SELECT DISTINCT customer_id
+						FROM sale.orders
+						WHERE order_date BETWEEN '2019-01-01' AND '2019-12-31'
+
+						INTERSECT
+
+						SELECT DISTINCT customer_id
+						FROM sale.orders
+						WHERE order_date BETWEEN '2020-01-01' AND '2020-12-31'
+						)
