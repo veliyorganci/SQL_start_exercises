@@ -1,0 +1,35 @@
+---- EXCEPT 
+
+--Write a query that returns the brands have 2018 model products but not 2019 model products. (edited) 
+
+
+SELECT DISTINCT B.brand_id, B.brand_name
+FROM product.product A, product.brand B
+WHERE A.brand_id = B.brand_id
+AND A.model_year = 2018
+
+EXCEPT
+
+SELECT DISTINCT B.brand_id, B.brand_name
+FROM product.product A, product.brand B
+WHERE A.brand_id = B.brand_id
+AND A.model_year = 2019
+
+
+-- Write a query that contains only products ordered in 2019 (Result not include products ordered in other years)
+
+WITH T1 AS
+(
+		SELECT	DISTINCT A.product_id
+		FROM	sale.order_item A, sale.orders B
+		WHERE	A.order_id = B.order_id
+		AND		YEAR(B.order_date) = 2019
+		EXCEPT
+		SELECT	DISTINCT A.product_id
+		FROM	sale.order_item A, sale.orders B
+		WHERE	A.order_id = B.order_id
+		AND		YEAR(B.order_date) <> 2019
+)
+SELECT	A.product_id, A.product_name
+FROM	T1, product.product A
+WHERE	T1.product_id = A.product_id
