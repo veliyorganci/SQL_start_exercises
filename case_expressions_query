@@ -1,4 +1,4 @@
-SIMPLE CASE EXP.--
+--SIMPLE CASE EXP.--
 
 SELECT order_id, order_status,
 			CASE order_status
@@ -10,7 +10,7 @@ SELECT order_id, order_status,
 FROM sale.orders
 
 
-SEARCHED CASE EXPRESSIONS --
+--SEARCHED CASE EXPRESSIONS --
 
 
 ---- Create  a new column with the meaning of the  values in the Order_Status column.
