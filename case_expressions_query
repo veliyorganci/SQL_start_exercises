@@ -24,7 +24,7 @@ SELECT	order_id, order_status,
 		END AS ord_status_mean
 FROM	sale.orders
 
-EXERCISE SEARCHED CASE EXPRESSIONS --
+-- plus EXERCISE SEARCHED CASE EXPRESSIONS --
 
 SELECT customer_id, first_name, last_name, email,
 	CASE
