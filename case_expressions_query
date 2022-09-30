@@ -1,0 +1,37 @@
+SIMPLE CASE EXP.--
+
+SELECT order_id, order_status,
+			CASE order_status
+				WHEN 1 THEN 'Pending'
+				WHEN 2 THEN 'Processing'
+				WHEN 3 THEN 'Rejected'
+				ELSE 'Completed'
+			END AS ord_status_mean
+FROM sale.orders
+
+
+SEARCHED CASE EXPRESSIONS --
+
+
+---- Create  a new column with the meaning of the  values in the Order_Status column.
+-- 1 = Pending; 2 = Processing; 3 = Rejected; 4 = Completed
+SELECT	order_id, order_status,
+		CASE
+			WHEN order_status = 1 THEN 'Pending'
+			WHEN order_status = 2 THEN 'Processing'
+			WHEN order_status = 3 THEN 'Rejected'
+			ELSE 'Completed'
+		END AS ord_status_mean
+FROM	sale.orders
+
+EXERCISE SEARCHED CASE EXPRESSIONS --
+
+SELECT customer_id, first_name, last_name, email,
+	CASE
+		WHEN email LIKE '%gmail.com%' THEN 'Gmail'
+		WHEN email LIKE '%hotmail.com%' THEN 'Hotmail'
+		WHEN email LIKE '%yahoo.com%' THEN 'Yahoo'
+		ELSE 'Other'
+	END  AS  email_service_provider
+FROM  sale.customer
+;
