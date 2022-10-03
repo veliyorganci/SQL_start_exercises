@@ -1,0 +1,104 @@
+DECLARE @CUSTOMER_ID INT = 4
+
+
+IF @CUSTOMER_ID = 1
+	PRINT 'CUSTOMER NAME IS ADAM'
+
+ELSE IF @CUSTOMER_ID = 2
+	PRINT 'CUSTOMER NAME IS SMITH'
+
+ELSE 
+	PRINT 'CUSTOMER NAME IS JOHN'
+
+
+---________________________________________________________
+
+--EXISTS ve NOT EXISTS IF ile uyumlu çalışır. Kontrollerde özellikle.
+
+IF EXISTS (SELECT 1)
+	SELECT * FROM ORDER_TBL
+
+
+IF NOT EXISTS (SELECT 1)
+	SELECT * FROM ORDER_TBL
+
+---__________________________________________________________
+
+DECLARE @CUSTOMER_ID INT
+
+SET @CUSTOMER_ID = 5
+
+IF EXISTS (SELECT * FROM ORDER_TBL WHERE @CUSTOMER_ID = @CUSTOMER_ID)
+		SELECT COUNT (ORDER_ID)
+		FROM ORDER_TBL
+		WHERE @CUSTOMER_ID = @CUSTOMER_ID
+
+IF NOT EXISTS (SELECT * FROM ORDER_TBL WHERE @CUSTOMER_ID = @CUSTOMER_ID)
+		SELECT COUNT (ORDER_ID)
+		FROM ORDER_TBL
+		WHERE @CUSTOMER_ID = @CUSTOMER_ID
+
+
+
+--  iki değişken tanımlayın 1.değişken 2.den büyük ise iki değişkeni toplayıp, 
+-- ikinci değişken 1.den büyük ise 2.değişkenden 1.değişkeni çıkarın 
+-- 1. değişken 2.değişkene eşit ise iki değişkeni çarpın
+
+
+DECLARE @Rakam1 INT
+DECLARE @Rakam2 INT
+DECLARE @Sonuç INT
+
+IF @Rakam1 > @Rakam2 
+			PRINT (Rakam1+Rakam2)
+
+ELSE IF @Rakam2 > @Rakam1 
+	PRINT (Rakam2 - Rakam1)
+
+ELSE
+	PRINT (Rakam1*Rakam2)
+
+
+	-- OWENS SOLUTION--
+
+
+DECLARE @Rakam1 INT
+DECLARE @Rakam2 INT
+
+SELECT @Rakam1 = 5, @Rakam2 = 6
+
+IF @Rakam1 > @Rakam2 
+			SELECT @Rakam1 + @Rakam2 AS Toplam
+
+ELSE IF @Rakam2 > @Rakam1 
+			SELECT @Rakam2 - @Rakam1 AS FARK
+
+ELSE SELECT @Rakam1 * @Rakam2 AS ÇARPIM
+
+
+
+--______________________________________-
+
+-- İstenilen tarihte verilen sipariş sayısı 5 ten küçükse ' Lower than 5'
+-- 5 - 10 arasında ise (kaç ise sayısı o)
+-- 10 'dan büyükse 'Upper than 10' yazdırın
+
+
+SELECT *
+FROM sale.orders
+
+
+DECLARE  @DAY DATE
+DECLARE @CNTORDER INT
+
+SET @DAY = '2022-09-28'
+
+SELECT @CNTORDER = COUNT (ORDER_ID)
+FROM ORDER_TBL
+WHERE ORDER_DATE = @DAY 
+
+IF @CNTORDER < 5
+		PRINT 'Lower than 5'
+ELSE IF @CNTORDER BETWEEN 5 AND 10
+		SELECT @CNTORDER
+ELSE PRINT 'Upper than 10'
