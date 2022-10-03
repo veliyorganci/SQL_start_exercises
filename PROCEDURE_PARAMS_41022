@@ -1,0 +1,75 @@
+CREATE OR ALTER PROC sp_sampleproc4 (@DAY DATE = '01-01-2022')    -- Parametre verirken parantez açıyoruz ve tanımlanacak değişkeni yazıyoruz, hangi tarihi giriyorsak o trhe ait sipariş dönsün)
+AS
+BEGIN
+		SELECT COUNT (ORDER_ID) AS CNT_ORDER
+		FROM ORDER_TBL
+		WHERE ORDER_DATE = @DAY
+END
+
+-- Çağıralım
+
+EXEC sp_sampleproc4  '2022-09-25'    --- İlgili tarihteki sipariş değeri ekrana gelecektir.--
+
+--___________________________________________________________________________----
+
+
+-- PROCEDURE 2 PARAMS
+
+CREATE OR ALTER PROC sp_sampleproc5 (@CUSTOMER VARCHAR (50), @DAY DATE = '01-01-2022')    --istdiğim müşterinin istediğim tairhteki sipariş dönsün)
+AS
+BEGIN
+		SELECT COUNT (ORDER_ID) AS CNT_ORDER
+		FROM ORDER_TBL
+		WHERE ORDER_DATE = @DAY
+		AND CUSTOMER_NAME = @CUSTOMER
+END
+
+EXEC sp_sampleproc5 'Adam', '2022-09-05'
+
+EXEC sp_sampleproc5 @customer = 'Adam', @day = '2022-09-05'
+
+--_____________________________________________________________________________
+
+-- QUERY (Sorgu) PARAMS 
+
+DECLARE @V1 INT
+DECLARE @V2 INT
+DECLARE @RESULT INT
+
+
+SET @V1 = 5
+SET @V2 = 6
+SET @RESULT = @V1 + @V2
+
+PRINT @RESULT veya SELECT @RESULT as RESULT
+
+--_______________________________________________________
+
+DECLARE @V1 INT = 5, @V2 INT = 6, RESULT INT
+
+SET @RESULT = @V1 * @V2
+
+SELECT @RESULT
+
+--_____________________________________________________
+
+
+DECLARE @V1 INT
+DECLARE @V2 INT
+DECLARE @RESULT INT
+
+--set ile virgülle birden fazla değişkene değer atayamayız. Ancak select ile mümkün
+
+SELECT @V1 = 5, @V2 = 6, @RESULT = @V1 * @V2
+
+SELECT @RESULT
+
+--___________________________________________
+
+DECLARE @DAY DATE
+
+SET @DATE = '2022-09-28'
+
+SELECT *
+FROM ORDER_TBL
+WHERE ORDER_DATE = @DAY
