@@ -1,0 +1,70 @@
+Assignment-3 Solution
+
+/*Generate a report included product IDs and discount effects on whether the increase 
+in the discount rate positively impacts the number of orders for the products.*/
+
+
+
+
+SELECT  DISTINCT product_id, discount
+FROM	sale.order_item
+ORDER BY
+		1,2
+
+
+
+
+SELECT  COUNT (DISTINCT discount)
+FROM	sale.order_item
+
+SELECT  *
+FROM	sale.order_item
+
+
+
+
+WITH T1 AS
+(
+SELECT product_id, discount, SUM(quantity) total_quantity
+FROM	sale.order_item
+GROUP BY	
+		product_id, discount
+), T2 AS
+(
+SELECT	product_id, discount, total_quantity,
+		FIRST_VALUE(total_quantity) OVER (PARTITION BY product_id ORDER BY discount) AS first_dis_quantity,
+		LAST_VALUE(total_quantity) OVER (PARTITION BY product_id ORDER BY discount ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) last_dis_quantity
+FROM	T1
+), T3 AS
+(
+SELECT	*,  1.0 * (last_dis_quantity - first_dis_quantity) / first_dis_quantity AS increase_rate
+FROM	T2
+) 
+SELECT	product_id, 
+		CASE WHEN	increase_rate BETWEEN -0.10 AND 0.10 THEN 'NEUTRAL'
+			WHEN	increase_rate > 0.10 THEN 'POSITIVE'
+			ELSE	'NEGATIVE'
+		END	AS discount_affect
+FROM	T3
+
+
+
+
+
+SELECT product_id, discount, SUM(quantity) total_quantity
+FROM	sale.order_item
+GROUP BY	
+		product_id, discount
+ORDER BY 
+		1,2
+
+
+
+
+SELECT	store_id, discount, COUNT (*)
+FROM	sale.orders A, sale.order_item B
+WHERE	A.order_id = B.order_id
+GROUP BY
+		store_id, discount
+ORDER BY 
+		1,2
