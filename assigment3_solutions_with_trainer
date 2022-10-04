@@ -13,7 +13,6 @@ ORDER BY
 
 
 
-
 SELECT  COUNT (DISTINCT discount)
 FROM	sale.order_item
 
