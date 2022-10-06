@@ -20,7 +20,6 @@ FROM	sale.order_item
 
 
 
-
 WITH T1 AS
 (
 SELECT product_id, discount, SUM(quantity) total_quantity
