@@ -5,7 +5,6 @@ in the discount rate positively impacts the number of orders for the products.*/
 
 
 
-
 SELECT  DISTINCT product_id, discount
 FROM	sale.order_item
 ORDER BY
