@@ -1,4 +1,3 @@
-
 SELECT *
 FROM [dbo].cust_dimen
 
