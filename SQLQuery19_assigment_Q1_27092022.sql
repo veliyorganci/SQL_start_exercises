@@ -54,4 +54,5 @@ UNION
   * 
    FROM buyed_one
 )
+
 ORDER BY other_product DESC
