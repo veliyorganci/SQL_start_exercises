@@ -2,7 +2,6 @@
 --You need to create a report on whether customers who purchased the product named '2TB Red 5400 rpm SATA III 3.5 Internal NAS HDD' buy the product below or not.
 --'Polk Audio - 50 W Woofer - Black' -- (other_product)
 
-
 CREATE VIEW HDD_product_buyer
 AS
 SELECT DISTINCT A.customer_id, A.First_Name, A.Last_Name
