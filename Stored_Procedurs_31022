@@ -1,6 +1,5 @@
 -- Stored Procedurs
 
-
 CREATE PROCEDURE sp_sampleproc1 AS
 BEGIN
 
