@@ -12,7 +12,6 @@ EXEC sp_sampleproc4  '2022-09-25'    --- İlgili tarihteki sipariş değeri ekra
 
 --___________________________________________________________________________----
 
-
 -- PROCEDURE 2 PARAMS
 
 CREATE OR ALTER PROC sp_sampleproc5 (@CUSTOMER VARCHAR (50), @DAY DATE = '01-01-2022')    --istdiğim müşterinin istediğim tairhteki sipariş dönsün)
@@ -29,6 +28,7 @@ EXEC sp_sampleproc5 'Adam', '2022-09-05'
 EXEC sp_sampleproc5 @customer = 'Adam', @day = '2022-09-05'
 
 --_____________________________________________________________________________
+
 
 -- QUERY (Sorgu) PARAMS 
 
