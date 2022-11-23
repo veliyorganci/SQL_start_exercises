@@ -5,12 +5,14 @@ CREATE TABLE Product(
 	prod_name VARCHAR(50),
 	quantitiy INT
 	);
+	
 CREATE TABLE Component(
 	comp_id INT PRIMARY KEY NOT NULL,
 	comp_name VARCHAR(50),
 	[description] VARCHAR(50),
 	quantity_comp INT
 	);
+	
 CREATE TABLE Supplier(
 	supp_id INT PRIMARY KEY NOT NULL,
 	supp_name VARCHAR(50),
