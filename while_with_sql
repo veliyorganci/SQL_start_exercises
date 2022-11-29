@@ -3,7 +3,6 @@
 --1 Den 10 a kadar rakam yazdıralım mesela.
 
 DECLARE @COUNTER INT = 1
-
 --sınır belirliyoruz.
 
 WHILE @COUNTER < 21
@@ -18,7 +17,6 @@ END
 
 SELECT *
 FROM ORDER_TBL
-
 
 DECLARE @ID INT = 10 
 
