@@ -14,7 +14,6 @@ END
 
 --------___________________________________________--
 
-
 SELECT *
 FROM ORDER_TBL
 
@@ -53,7 +52,6 @@ END
 
 SELECT *, dbo.fn_upper_first_char ('CUSTOMER_NAME') AS NEW_NAME
 FROM ORDER_TBL
-
 
 ---___________________ TABLE VALUED FUNCTIONS__________________----
 
