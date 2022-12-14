@@ -6,8 +6,6 @@ BEGIN
 		WHERE ORDER_DATE = @DAY
 END
 
-
-
 -- Çağıralım
 
 EXEC sp_sampleproc4  '2022-09-25'    --- İlgili tarihteki sipariş değeri ekrana gelecektir.--
