@@ -1,10 +1,9 @@
 
 
---Bu tablo için ayrı bir database oluşturmanız daha uygun olacaktır.
---Index' in faydalarının daha belirgin olarak görülmesi için bu şekilde bir tablo oluşturulmuştur.
+--Bu tablo iÃ§in ayrÄ± bir database oluÅŸturmanÄ±z daha uygun olacaktÄ±r.
+--Index' in faydalarÄ±nÄ±n daha belirgin olarak gÃ¶rÃ¼lmesi iÃ§in bu ÅŸekilde bir tablo oluÅŸturulmuÅŸtur.
 
---önce tablonun çatısını oluşturuyoruz.
-
+--Ã¶nce tablonun Ã§atÄ±sÄ±nÄ± oluÅŸturuyoruz.
 
 create table website_visitor 
 (
@@ -16,7 +15,7 @@ city varchar(50)
 );
 
 
---Tabloya rastgele veri atıyoruz konumuz haricindedir, şimdilik varlığını bilmeniz yeterli.
+--Tabloya rastgele veri atÄ±yoruz konumuz haricindedir, ÅŸimdilik varlÄ±ÄŸÄ±nÄ± bilmeniz yeterli.
 
 
 DECLARE @i int = 1
@@ -40,13 +39,13 @@ website_visitor
 
 
 
---İstatistikleri (Process ve time) açıyoruz, bunu açmak zorunda değilsiniz sadece yapılan işlemlerin detayını görmek için açtık.
+--Ä°statistikleri (Process ve time) aÃ§Ä±yoruz, bunu aÃ§mak zorunda deÄŸilsiniz sadece yapÄ±lan iÅŸlemlerin detayÄ±nÄ± gÃ¶rmek iÃ§in aÃ§tÄ±k.
 SET STATISTICS IO on
 SET STATISTICS TIME on
 
 
 
---herhangi bir index olmadan visitor_id' ye şart verip tüm tabloyu çağırıyoruz
+--herhangi bir index olmadan visitor_id' ye ÅŸart verip tÃ¼m tabloyu Ã§aÄŸÄ±rÄ±yoruz
 
 
 SELECT *
@@ -55,16 +54,16 @@ website_visitor
 where
 visitor_id = 100
 
---execution plan' a baktığınızda Table Scan yani tüm tabloyu teker teker tüm değerlere bakarak aradığını göreceksiniz.
+--execution plan' a baktÄ±ÄŸÄ±nÄ±zda Table Scan yani tÃ¼m tabloyu teker teker tÃ¼m deÄŸerlere bakarak aradÄ±ÄŸÄ±nÄ± gÃ¶receksiniz.
 
 
 
---Visitor_id üzerinde bir index oluşturuyoruz
+--Visitor_id Ã¼zerinde bir index oluÅŸturuyoruz
 
 Create CLUSTERED INDEX CLS_INX_1 ON website_visitor (visitor_id);
 
 
---visitor_id' ye şart verip sadece visitor_id' yi çağırıyoruz
+--visitor_id' ye ÅŸart verip sadece visitor_id' yi Ã§aÄŸÄ±rÄ±yoruz
 
 
 
@@ -75,12 +74,12 @@ where
 visitor_id = 100
 
 
---execution plan' a baktığınızda Clustered index seek
---yani sadece clustered index' te aranılan değeri B-Tree yöntemiyle bulup getirdiğini görüyoruz.
+--execution plan' a baktÄ±ÄŸÄ±nÄ±zda Clustered index seek
+--yani sadece clustered index' te aranÄ±lan deÄŸeri B-Tree yÃ¶ntemiyle bulup getirdiÄŸini gÃ¶rÃ¼yoruz.
 
 
 
---visitor_id' ye şart verip tüm tabloyu çağırıyoruz
+--visitor_id' ye ÅŸart verip tÃ¼m tabloyu Ã§aÄŸÄ±rÄ±yoruz
 
 SELECT *
 FROM
@@ -88,13 +87,13 @@ website_visitor
 where
 visitor_id = 100
 
---execution plan' a baktığınızda Clustered index seek yaptığını görüyoruz.
---Clustered index tablodaki tüm bilgileri leaf node'larda sakladığı için ayrıca bir yere gitmek ihtiyacı olmadan
---primary key bilgisiyle (clustered index) tüm bilgileri getiriyor.
+--execution plan' a baktÄ±ÄŸÄ±nÄ±zda Clustered index seek yaptÄ±ÄŸÄ±nÄ± gÃ¶rÃ¼yoruz.
+--Clustered index tablodaki tÃ¼m bilgileri leaf node'larda sakladÄ±ÄŸÄ± iÃ§in ayrÄ±ca bir yere gitmek ihtiyacÄ± olmadan
+--primary key bilgisiyle (clustered index) tÃ¼m bilgileri getiriyor.
 ------------------------------
 
 
---Peki farklı bir sütuna şart verirsek;
+--Peki farklÄ± bir sÃ¼tuna ÅŸart verirsek;
 
 
 SELECT first_name
@@ -104,19 +103,19 @@ where
 first_name = 'visitor_name17'
 
 
---Execution Plan' da Görüleceği üzere Clustered Index Scan yapıyor.
---Dikkat edin Seek değil Scan. Aradığımız sütuna ait değeri clustered index' in leaf page' lerinde tutulan bilgilerde arıyor
---Tabloda arar gibi, index yokmuşçasına.
+--Execution Plan' da GÃ¶rÃ¼leceÄŸi Ã¼zere Clustered Index Scan yapÄ±yor.
+--Dikkat edin Seek deÄŸil Scan. AradÄ±ÄŸÄ±mÄ±z sÃ¼tuna ait deÄŸeri clustered index' in leaf page' lerinde tutulan bilgilerde arÄ±yor
+--Tabloda arar gibi, index yokmuÅŸÃ§asÄ±na.
 
 
---Yukarıdaki gibi devamlı sorgu atılan non-key bir attribute söz konusu ise;
---Bu şekildeki sütunlara clustered index tanımlayamayacağımız için NONCLUSTERED INDEX tanımlamamız gerekiyor.
+--YukarÄ±daki gibi devamlÄ± sorgu atÄ±lan non-key bir attribute sÃ¶z konusu ise;
+--Bu ÅŸekildeki sÃ¼tunlara clustered index tanÄ±mlayamayacaÄŸÄ±mÄ±z iÃ§in NONCLUSTERED INDEX tanÄ±mlamamÄ±z gerekiyor.
 
---Non clustered index tanımlayalım ad sütununa
+--Non clustered index tanÄ±mlayalÄ±m ad sÃ¼tununa
 CREATE NONCLUSTERED INDEX ix_NoN_CLS_1 ON website_visitor (first_name);
 
 
---Ad sütununa şart verip kendisini çağıralım:
+--Ad sÃ¼tununa ÅŸart verip kendisini Ã§aÄŸÄ±ralÄ±m:
 
 SELECT first_name
 FROM
@@ -125,12 +124,12 @@ where
 first_name = 'visitor_name17'
 
 
---Execution Plan' da Görüleceği üzere üzere aynı yukarıda visitor id'de olduğu gibi index seek yöntemiyle verileri getirdi.
---Tek fark NonClustered indexi kullandı.
+--Execution Plan' da GÃ¶rÃ¼leceÄŸi Ã¼zere Ã¼zere aynÄ± yukarÄ±da visitor id'de olduÄŸu gibi index seek yÃ¶ntemiyle verileri getirdi.
+--Tek fark NonClustered indexi kullandÄ±.
 
 
---Peki ad sütunundan başka bir sütun daha çağırırsak ne olur?
---Günlük hayatta da ad ile genellikle soyadı birlikte sorgulanır.
+--Peki ad sÃ¼tunundan baÅŸka bir sÃ¼tun daha Ã§aÄŸÄ±rÄ±rsak ne olur?
+--GÃ¼nlÃ¼k hayatta da ad ile genellikle soyadÄ± birlikte sorgulanÄ±r.
 
 
 SELECT first_name, last_name
@@ -140,40 +139,40 @@ where
 first_name = 'visitor_name17'
 
 
---Execution Plan' da Görüleceği üzere burada ad ismine verdiğimiz şart için NonClustered index seek kullandı,
---Sonrasında soyad bilgisini de getirebilmek için Clustered index e Key lookup yaptı.
---Yani clustered index' e gidip sorgulanan ad' a ait primary key' e başvurdu
---Sonrasında farklı yerlerden getirilen bu iki bilgiyi Nested Loops ile birleştirdi.
+--Execution Plan' da GÃ¶rÃ¼leceÄŸi Ã¼zere burada ad ismine verdiÄŸimiz ÅŸart iÃ§in NonClustered index seek kullandÄ±,
+--SonrasÄ±nda soyad bilgisini de getirebilmek iÃ§in Clustered index e Key lookup yaptÄ±.
+--Yani clustered index' e gidip sorgulanan ad' a ait primary key' e baÅŸvurdu
+--SonrasÄ±nda farklÄ± yerlerden getirilen bu iki bilgiyi Nested Loops ile birleÅŸtirdi.
 
 
---Bir sorgunun en performanslı hali idealde Sorgu costunun %100 Index Seek yöntemi ile getiriliyor olmasıdır!
+--Bir sorgunun en performanslÄ± hali idealde Sorgu costunun %100 Index Seek yÃ¶ntemi ile getiriliyor olmasÄ±dÄ±r!
 
 
---Şu demek oluyor ki, bu da tam olarak performans isteğimizi karşılamadı, daha performanslı bir index oluşturabilirim.
+--Åu demek oluyor ki, bu da tam olarak performans isteÄŸimizi karÅŸÄ±lamadÄ±, daha performanslÄ± bir index oluÅŸturabilirim.
 
---Burada yapabileceğim, ad sütunu ile devamlı olarak birlikte sorgulama yaptığım sütunlara INCLUDE INDEX oluşturma işlemidir.
---Bunun çalışma mantığı;
---NonClustered index' te leaf page lerde sadece nonclustered index oluşturulan sütunun ve primary keyinin bilgisi tutulmaktaydı.
---Include index oluşturulduğunda verilen sütun bilgileri bu leaf page lere eklenmesi ve ad ile birlikte kolayca getirilmesi amaçlanmıştır.
+--Burada yapabileceÄŸim, ad sÃ¼tunu ile devamlÄ± olarak birlikte sorgulama yaptÄ±ÄŸÄ±m sÃ¼tunlara INCLUDE INDEX oluÅŸturma iÅŸlemidir.
+--Bunun Ã§alÄ±ÅŸma mantÄ±ÄŸÄ±;
+--NonClustered index' te leaf page lerde sadece nonclustered index oluÅŸturulan sÃ¼tunun ve primary keyinin bilgisi tutulmaktaydÄ±.
+--Include index oluÅŸturulduÄŸunda verilen sÃ¼tun bilgileri bu leaf page lere eklenmesi ve ad ile birlikte kolayca getirilmesi amaÃ§lanmÄ±ÅŸtÄ±r.
 
 
---Include indexi oluşturalım:
+--Include indexi oluÅŸturalÄ±m:
 Create unique NONCLUSTERED INDEX ix_NoN_CLS_2 ON website_visitor (first_name) include (last_name)
 
 
---ad ve soyadı ad sütununa şart vererek birlikte çağıralım
+--ad ve soyadÄ± ad sÃ¼tununa ÅŸart vererek birlikte Ã§aÄŸÄ±ralÄ±m
 SELECT first_name, last_name
 FROM
 website_visitor
 where
 first_name = 'visitor_name17'
 
---Execution Plan' da Görüleceği üzere sadece Index Seek ile sonucu getirmiş oldu.
+--Execution Plan' da GÃ¶rÃ¼leceÄŸi Ã¼zere sadece Index Seek ile sonucu getirmiÅŸ oldu.
 
 
---soyad sütununa şart verip sadece kendisini çağırdığımızda 
---Kendisine tanımlı özel bir index olmadığı için Index seek yapamadı, ad sütunun indexinde tüm değerlere teker teker bakarak
---Yani Scan yöntemiyle sonucu getirdi.
+--soyad sÃ¼tununa ÅŸart verip sadece kendisini Ã§aÄŸÄ±rdÄ±ÄŸÄ±mÄ±zda 
+--Kendisine tanÄ±mlÄ± Ã¶zel bir index olmadÄ±ÄŸÄ± iÃ§in Index seek yapamadÄ±, ad sÃ¼tunun indexinde tÃ¼m deÄŸerlere teker teker bakarak
+--Yani Scan yÃ¶ntemiyle sonucu getirdi.
 
 SELECT last_name
 FROM
@@ -181,9 +180,9 @@ website_visitor
 where
 last_name = 'visitor_surname10'
 
---Execution Plan' da Görüleceği üzere bize bir index tavsiyesi veriyor.
+--Execution Plan' da GÃ¶rÃ¼leceÄŸi Ã¼zere bize bir index tavsiyesi veriyor.
 
---İyi çalışmalar dilerim.
+--Ä°yi Ã§alÄ±ÅŸmalar dilerim.
 
 SELECT last_name
 FROM
