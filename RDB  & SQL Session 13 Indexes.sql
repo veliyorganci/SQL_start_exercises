@@ -1,5 +1,4 @@
 
-
 --Bu tablo için ayrı bir database oluşturmanız daha uygun olacaktır.
 --Index' in faydalarının daha belirgin olarak görülmesi için bu şekilde bir tablo oluşturulmuştur.
 
