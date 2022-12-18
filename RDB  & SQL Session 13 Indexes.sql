@@ -13,9 +13,7 @@ phone_number bigint,
 city varchar(50)
 );
 
-
 --Tabloya rastgele veri atıyoruz konumuz haricindedir, şimdilik varlığını bilmeniz yeterli.
-
 
 DECLARE @i int = 1
 DECLARE @RAND AS INT
