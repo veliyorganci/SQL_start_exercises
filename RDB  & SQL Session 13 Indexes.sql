@@ -4,6 +4,7 @@
 
 --önce tablonun çatısını oluşturuyoruz.
 
+
 create table website_visitor 
 (
 visitor_id int,
