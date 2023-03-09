@@ -12,7 +12,6 @@ FROM [dbo].prod_dimen
 
 SELECT *
 FROM [dbo].Shipping_Dimen
-
 ----___________________________________________________
 
 --	 Analyze the data by finding the answers to the questions below:
