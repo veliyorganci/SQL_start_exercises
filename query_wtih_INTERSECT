@@ -10,7 +10,6 @@ FROM	product.product A, product.brand B
 WHERE	model_year = 2020
 AND		A.brand_id = B.brand_id
 
-
 SELECT customer_id, first_name, last_name
 FROM sale.customer
 WHERE customer_id IN (
