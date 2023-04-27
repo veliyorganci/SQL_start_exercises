@@ -11,13 +11,11 @@ ORDER BY
 		1,2
 
 
-
 SELECT  COUNT (DISTINCT discount)
 FROM	sale.order_item
 
 SELECT  *
 FROM	sale.order_item
-
 
 
 WITH T1 AS
@@ -43,8 +41,6 @@ SELECT	product_id,
 			ELSE	'NEGATIVE'
 		END	AS discount_affect
 FROM	T3
-
-
 
 
 
