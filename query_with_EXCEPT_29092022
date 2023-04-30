@@ -2,7 +2,6 @@
 
 --Write a query that returns the brands have 2018 model products but not 2019 model products. (edited) 
 
-
 SELECT DISTINCT B.brand_id, B.brand_name
 FROM product.product A, product.brand B
 WHERE A.brand_id = B.brand_id
