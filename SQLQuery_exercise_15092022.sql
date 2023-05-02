@@ -1,6 +1,7 @@
 
 CREATE DATABASE LibraryDB;
 
+
 Use LibraryDB
 
 CREATE SCHEMA Person;
