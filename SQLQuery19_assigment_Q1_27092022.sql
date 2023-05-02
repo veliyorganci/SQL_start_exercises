@@ -11,7 +11,6 @@ AND B.order_id = C.order_id
 AND C.product_id = D.product_id
 AND D.product_name = '2TB Red 5400 rpm SATA III 3.5 Internal NAS HDD'
 
-
 --Created a view with the details of customer who bought the second product
 CREATE VIEW polk_product_buyer
 AS
