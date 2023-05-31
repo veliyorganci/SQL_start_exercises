@@ -19,7 +19,6 @@ FROM [dbo].Shipping_Dimen
 --	 “prod_dimen”, “shipping_dimen”, Create a new table, named as
 --	 “combined_table”.
 
-
 SELECT A.Sales, A.Discount, A.Order_Quantity, A.Product_Base_Margin, B.*, C.*, D.*,E.*
 INTO "combined_table"
 		FROM Market_Fact A
@@ -27,7 +26,6 @@ INTO "combined_table"
 		FULL OUTER JOIN Prod_Dimen C ON C.Prod_ID = A.Prod_ID
 		FULL OUTER JOIN Cust_Dimen D ON D.Cust_ID = A.Cust_ID
 		FULL OUTER JOIN Shipping_Dimen E ON E.Ship_ID = A.Ship_ID
-
 
 SELECT*
 FROM combined_table
