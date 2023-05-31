@@ -21,6 +21,7 @@ CREATE TABLE Supplier(
 	supp_country VARCHAR(50),
 	is_active BIT
 	);
+	
 CREATE TABLE Prod_Comp(
 	prod_id INT,
 	comp_id INT,
