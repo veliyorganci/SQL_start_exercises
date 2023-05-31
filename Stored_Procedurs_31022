@@ -4,7 +4,6 @@ CREATE PROCEDURE sp_sampleproc1 AS
 BEGIN
 
 	SELECT 5*5
-
 END
 
 --- Ve şimdi query
