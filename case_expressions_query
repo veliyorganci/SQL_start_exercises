@@ -1,6 +1,5 @@
 --SIMPLE CASE EXP.--
 
-
 SELECT order_id, order_status,
 			CASE order_status
 				WHEN 1 THEN 'Pending'
