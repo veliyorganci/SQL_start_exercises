@@ -9,7 +9,6 @@ END
 -- Çağıralım
 
 EXEC sp_sampleproc4  '2022-09-25'    --- İlgili tarihteki sipariş değeri ekrana gelecektir.--
-
 --___________________________________________________________________________----
 
 -- PROCEDURE 2 PARAMS
