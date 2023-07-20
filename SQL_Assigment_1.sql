@@ -1,5 +1,4 @@
 CREATE DATABASE Manufacturer;
-
 USE Manufacturer;
 CREATE TABLE Product(
 	prod_id INT PRIMARY KEY NOT NULL,
