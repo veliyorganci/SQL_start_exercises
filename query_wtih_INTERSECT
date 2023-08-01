@@ -1,6 +1,7 @@
 --Write a quary that returns all brands with products for both 2018 and 2020 model year.
 
 
+
 SELECT	DISTINCT B.brand_id, B.brand_name
 FROM	product.product A, product.brand B
 WHERE	model_year = 2018
