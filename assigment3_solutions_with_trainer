@@ -10,7 +10,6 @@ FROM	sale.order_item
 ORDER BY
 		1,2
 
-
 SELECT  COUNT (DISTINCT discount)
 FROM	sale.order_item
 
