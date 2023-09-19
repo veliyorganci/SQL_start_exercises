@@ -14,7 +14,6 @@ SELECT *
 FROM [dbo].Shipping_Dimen
 ----___________________________________________________
 
-
 --	 Analyze the data by finding the answers to the questions below:
 --	 1. Using the columns of “market_fact”, “cust_dimen”, “orders_dimen”, 
 --	 “prod_dimen”, “shipping_dimen”, Create a new table, named as
