@@ -8,7 +8,6 @@ ELSE IF @CUSTOMER_ID = 2
 ELSE 
 	PRINT 'CUSTOMER NAME IS JOHN'
 
-
 ---________________________________________________________
 
 --EXISTS ve NOT EXISTS IF ile uyumlu çalışır. Kontrollerde özellikle.
